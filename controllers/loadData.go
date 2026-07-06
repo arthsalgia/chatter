@@ -1,4 +1,4 @@
-package services
+package controllers
 
 import (
 	"bytes"
@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/arthsalgia/messages-api/models"
+	"github.com/arthsalgia/messages-api/services"
 	"github.com/go-gota/gota/dataframe"
 )
 
@@ -15,7 +16,7 @@ var blobRegex = regexp.MustCompile(`[\x20-\x7E\x{2010}-\x{201F}\x{2026}]{2,}`)
 
 func LoadAllMessages() {
 	var messages []models.MessagesAll
-	DB.Order("ROWID desc").Find(&messages)
+	services.DB.Order("ROWID desc").Find(&messages)
 
 	if len(messages) == 0 {
 		return
@@ -56,7 +57,7 @@ func LoadAllMessages() {
 			c_id = m.Ck_chat_id
 		}
 
-		text = ParseMessage(text)
+		text = services.ParseMessage(text)
 
 		if text == "" || text == "an image" {
 			continue
