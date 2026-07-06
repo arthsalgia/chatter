@@ -21,6 +21,7 @@ func main() {
 	router.GET("/celebrity", controllers.Celebrity)
 	router.GET("/nth-common", controllers.NthCommon)
 	router.GET("/most-common-word", controllers.MostCommonWord)
+	router.GET("/most-texted-date", controllers.MostTextedDate)
 
 	router.Run()
 }
