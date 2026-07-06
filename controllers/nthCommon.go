@@ -14,7 +14,7 @@ import (
 func NthCommon(c *gin.Context) {
 	fromDate := c.DefaultQuery("from", "2000-01-01")
 	toDate := c.DefaultQuery("to", time.Now().Format("2006-01-02"))
-	n := c.DefaultQuery("n", "5")
+	n := c.DefaultQuery("n", "3")
 
 	numberOfRecords, err := strconv.Atoi(n)
 

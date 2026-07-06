@@ -6,7 +6,7 @@ import (
 )
 
 type Freqs struct {
-	ChatID           string `json:"chat_id" dataframe:"chat_id"`
+	Data             string `json:"data" dataframe:"data"`
 	NumberOfMessages int    `json:"number_of_messages" dataframe:"number_of_messages"`
 }
 
@@ -21,9 +21,9 @@ func NthCommonString(arr []string, n int) []any {
 	}
 
 	freqsList := make([]Freqs, 0, len(inputMap))
-	for chatID, count := range inputMap {
+	for data, count := range inputMap {
 		freqsList = append(freqsList, Freqs{
-			ChatID:           chatID,
+			Data:             data,
 			NumberOfMessages: count,
 		})
 	}
