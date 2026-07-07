@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"time"
 
 	"gorm.io/driver/sqlite"
@@ -14,6 +15,7 @@ import (
 var DB *gorm.DB
 
 func ConnectDb(file string) {
+
 	newLogger := logger.New(
 		log.New(os.Stdout, "\r\n", log.LstdFlags),
 		logger.Config{
@@ -21,11 +23,30 @@ func ConnectDb(file string) {
 			LogLevel:      logger.Warn,
 		},
 	)
-	var err error
-	DB, err = gorm.Open(sqlite.Open(file), &gorm.Config{Logger: newLogger})
-	if err != nil {
-		log.Fatalf("Failed to connect to database: %v", err)
-	}
+	if file == "" {
+		homeDir, err := os.UserHomeDir()
 
-	fmt.Println("GORM successfully connected to SQLite!")
+		if err != nil {
+			log.Fatalf("Failed to detect home directory: %v", err)
+		}
+
+		dbPath := filepath.Join(homeDir, "Library", "Messages", "chat.db")
+
+		DB, err = gorm.Open(sqlite.Open(dbPath), &gorm.Config{Logger: newLogger})
+
+		if err != nil {
+			log.Fatalf("Failed to connect to database: %v", err)
+		}
+
+		fmt.Println("Successfully connected to database at ~/Library/Messages/chat.db")
+	} else {
+		var err error
+		DB, err = gorm.Open(sqlite.Open(file), &gorm.Config{Logger: newLogger})
+		if err != nil {
+
+			log.Fatalf("Failed to connect to database: %v", err)
+		}
+
+		fmt.Println("Successfully connected to database at ", file)
+	}
 }

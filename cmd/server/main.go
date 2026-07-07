@@ -1,18 +1,22 @@
 package main
 
 import (
+	"flag"
+
 	"github.com/arthsalgia/messages-api/controllers"
 	"github.com/arthsalgia/messages-api/services"
 	"github.com/gin-gonic/gin"
 )
 
-func init() {
-	services.LoadEnv()
-	services.ConnectDb("chat.db")
-	controllers.LoadAllMessages()
-}
-
 func main() {
+
+	dbPathPtr := flag.String("db", "", "path to the iMessage SQLite chat file")
+	portPtr := flag.String("port", ":8000", "The port for the API server to run on")
+	flag.Parse()
+
+	services.ConnectDb(*dbPathPtr)
+	controllers.LoadAllMessages()
+
 	router := gin.Default()
 
 	router.GET("/get-all", controllers.GetAll)
@@ -23,5 +27,5 @@ func main() {
 	router.GET("/most-common-word", controllers.MostCommonWord)
 	router.GET("/most-texted-date", controllers.MostTextedDate)
 
-	router.Run()
+	router.Run(*portPtr)
 }

@@ -47,8 +47,12 @@ func LoadAllMessages() {
 			NSString := strings.Index(decoded, "NSString")
 			remaining := decoded[NSString+8:]
 			iINSDictionary := strings.Index(remaining, " iI NSDictionary")
-			text = remaining[:iINSDictionary]
-			text = strings.TrimSpace(text)
+			if iINSDictionary != -1 {
+				text = remaining[:iINSDictionary]
+				text = strings.TrimSpace(text)
+			} else {
+				continue
+			}
 		}
 
 		if len(m.Ck_chat_id) >= 11 {
