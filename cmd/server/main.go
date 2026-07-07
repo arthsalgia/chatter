@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 
 	"github.com/arthsalgia/messages-api/controllers"
 	"github.com/arthsalgia/messages-api/services"
@@ -10,9 +11,11 @@ import (
 
 func main() {
 
-	dbPathPtr := flag.String("db", "", "path to the iMessage SQLite chat file")
+	dbPathPtr := flag.String("db", "chat.db", "path to the iMessage SQLite chat file")
 	portPtr := flag.String("port", ":8000", "The port for the API server to run on")
 	flag.Parse()
+
+	fmt.Println("Starting server...")
 
 	services.ConnectDb(*dbPathPtr)
 	controllers.LoadAllMessages()

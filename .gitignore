@@ -1,5 +1,6 @@
 # Binaries for programs and plugins
 server
+server_mac
 *.exe
 *.exe~
 *.dll
@@ -30,7 +31,7 @@ server
 *.db-wal
 *.sqlite
 *.sqlite3
-
+.DS_Store
 # GIN Logs
 *.log
 logs/

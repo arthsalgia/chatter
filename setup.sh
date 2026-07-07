@@ -62,12 +62,8 @@ echo "========================================="
 echo ""
 
 
-if [ -f "./server" ]; then
-    ./server -db="$DB_DEST" -port=":$PORT_NUMBER"
+if [ -f "./server_mac" ]; then
+    ./server_mac -db="$DB_DEST" -port=":$PORT_NUMBER"
 else
     go run ./cmd/server/main.go -db="$DB_DEST" -port=":$PORT_NUMBER"
 fi
-
-echo "API server successfully started on port :$PORT_NUMBER"
-echo "========================================="
-echo ""
