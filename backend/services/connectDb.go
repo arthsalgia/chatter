@@ -47,6 +47,6 @@ func ConnectDb(file string) {
 			log.Fatalf("Failed to connect to database: %v", err)
 		}
 
-		fmt.Println("Successfully connected to database at ", file)
+		fmt.Println("Successfully connected to database at", file)
 	}
 }

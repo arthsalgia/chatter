@@ -14,12 +14,14 @@ import (
 var MessagesDF dataframe.DataFrame
 var blobRegex = regexp.MustCompile(`[\x20-\x7E\x{2010}-\x{201F}\x{2026}]{2,}`)
 
-func LoadAllMessages() {
+func LoadAllMessages() bool {
 	var messages []models.MessagesAll
 	services.DB.Order("ROWID desc").Find(&messages)
 
-	if len(messages) == 0 {
-		return
+	var count int64
+	err := services.DB.Table("message").Count(&count).Error
+	if err != nil {
+		return false
 	}
 
 	type FlatMessage struct {
@@ -85,5 +87,5 @@ func LoadAllMessages() {
 	}
 
 	MessagesDF = dataframe.LoadStructs(flat)
-
+	return true
 }
