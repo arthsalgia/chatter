@@ -1,6 +1,6 @@
 # Binaries for programs and plugins
-/server
-/server_mac
+server
+server_mac
 *.exe
 *.exe~
 *.dll
