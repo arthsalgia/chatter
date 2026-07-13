@@ -40,7 +40,7 @@ func Search(c *gin.Context) {
 		Filter(dataframe.F{
 			Colname:    "IsFromMe",
 			Comparator: series.Eq,
-			Comparando: 0}).
+			Comparando: 1}).
 		Filter(dataframe.F{
 			Colname:    "Text",
 			Comparator: series.CompFunc,
