@@ -19,11 +19,6 @@ func BestFriend(c *gin.Context) {
 			Filter(dataframe.F{Colname: "Date", Comparator: series.LessEq, Comparando: toDate}).
 			Col("ChatID").Records())
 
-	if mostCommon == "" && frequency == 0 {
-		c.Status(400)
-		return
-	}
-
 	c.JSON(200, gin.H{
 		"best_friend":        mostCommon,
 		"number_of_messages": frequency,

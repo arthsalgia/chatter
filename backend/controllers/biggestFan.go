@@ -22,11 +22,6 @@ func BiggestFan(c *gin.Context) {
 			Comparando: 0}).
 		Col("ChatID").Records())
 
-	if mostCommon == "" && frequency == 0 {
-		c.Status(400)
-		return
-	}
-
 	c.JSON(200, gin.H{
 		"biggest_fan":        mostCommon,
 		"number_of_messages": frequency,
