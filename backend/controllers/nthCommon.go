@@ -23,8 +23,8 @@ func NthCommon(c *gin.Context) {
 	}
 
 	data := services.NthCommonString(MessagesDF.
-		Filter(dataframe.F{Colname: "Date", Comparator: series.Greater, Comparando: fromDate}).
-		Filter(dataframe.F{Colname: "Date", Comparator: series.Less, Comparando: toDate}).
+		Filter(dataframe.F{Colname: "Date", Comparator: series.GreaterEq, Comparando: fromDate}).
+		Filter(dataframe.F{Colname: "Date", Comparator: series.LessEq, Comparando: toDate}).
 		Col("ChatID").Records(), numberOfRecords)
 
 	c.JSON(200, data)

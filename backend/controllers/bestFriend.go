@@ -15,8 +15,8 @@ func BestFriend(c *gin.Context) {
 
 	mostCommon, frequency := services.MostCommonString(
 		MessagesDF.
-			Filter(dataframe.F{Colname: "Date", Comparator: series.Greater, Comparando: fromDate}).
-			Filter(dataframe.F{Colname: "Date", Comparator: series.Less, Comparando: toDate}).
+			Filter(dataframe.F{Colname: "Date", Comparator: series.GreaterEq, Comparando: fromDate}).
+			Filter(dataframe.F{Colname: "Date", Comparator: series.LessEq, Comparando: toDate}).
 			Col("ChatID").Records())
 
 	if mostCommon == "" && frequency == 0 {

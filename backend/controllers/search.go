@@ -22,8 +22,8 @@ func Search(c *gin.Context) {
 	}
 
 	countOther := MessagesDF.
-		Filter(dataframe.F{Colname: "Date", Comparator: series.Greater, Comparando: fromDate}).
-		Filter(dataframe.F{Colname: "Date", Comparator: series.Less, Comparando: toDate}).
+		Filter(dataframe.F{Colname: "Date", Comparator: series.GreaterEq, Comparando: fromDate}).
+		Filter(dataframe.F{Colname: "Date", Comparator: series.LessEq, Comparando: toDate}).
 		Filter(dataframe.F{
 			Colname:    "IsFromMe",
 			Comparator: series.Eq,
