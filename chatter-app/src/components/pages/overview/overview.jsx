@@ -2,7 +2,8 @@ import { useState } from "react";
 import "./overview.css"
 
 import BestFriend from "../../bestFriend/bestFriend";
-import BiggestFan from "../../biggestFan/biggestFan"
+import BiggestFan from "../../biggestFan/biggestFan";
+import Celebrity from "../../celebrity/celebrity";
 
 export default function Overview() {
 
@@ -11,6 +12,7 @@ export default function Overview() {
         
         <BestFriend />
         <BiggestFan />
+        <Celebrity />
 
     </div>
   );

@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+.celebrity-page {
+  --ink: #241F3D;
+  --muted: #8B87A3;
+  --accent: #FF4F87;
+  --accent-soft: #FFE3ED;
+  --violet: #6C5CE7;
+  --bg: #FAF8FF;
+  --card-bg: #FFFFFF;
+  --border: #ECE9F7;
+
+  min-height: 100%;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+}
+
+.celebrity-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px -20px rgba(108, 92, 231, 0.25);
+}
+
+.celebrity-header {
+  padding: 28px 32px 24px;
+  background: linear-gradient(135deg, var(--violet) 0%, var(--accent) 100%);
+  color: white;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: 20px 20px 0 0;
+}
+
+.header-text {
+  min-width: 0;
+}
+
+.info-button {
+  position: relative;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.info-button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.info-button:hover,
+.info-button:focus-visible {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+.info-button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+.info-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: -6px;
+  width: 220px;
+  padding: 10px 12px;
+  background: var(--ink);
+  color: white;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px -6px rgba(36, 31, 61, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.info-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 10px;
+  border: 6px solid transparent;
+  border-top-color: var(--ink);
+}
+
+.info-button:hover .info-tooltip,
+.info-button:focus-visible .info-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .info-tooltip {
+    transition: none;
+  }
+}
+
+.header-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.header-title {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 2em;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.date-section {
+  display: flex;
+  gap: 14px;
+  padding: 24px 32px 8px;
+}
+
+.date-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.date-text {
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.date-input {
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  color: var(--ink);
+  width: 100%;
+  box-sizing: border-box;
+  background: #fcfbff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: var(--violet);
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
+}
+
+.celebrity-result {
+  margin: 20px 32px 32px;
+  padding: 28px 20px;
+  background: var(--accent-soft);
+  border-radius: 16px;
+  text-align: center;
+  min-height: 108px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.result-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.result-name {
+  position: relative;
+  display: inline-block;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.7em;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 auto 12px;
+}
+
+.result-underline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 4px;
+  opacity: 0.35;
+}
+
+.message-count {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.message-count-number {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.celebrity-skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.skeleton-line {
+  border-radius: 6px;
+  background: linear-gradient(90deg, #efe9fb 25%, #f7f3ff 50%, #efe9fb 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.3s ease-in-out infinite;
+}
+
+.skeleton-label {
+  width: 100px;
+  height: 10px;
+}
+
+.skeleton-name {
+  width: 160px;
+  height: 22px;
+}
+
+.skeleton-count {
+  width: 120px;
+  height: 12px;
+  margin-top: 4px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-line {
+    animation: none;
+  }
+}
