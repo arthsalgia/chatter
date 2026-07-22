@@ -19,7 +19,7 @@ func Celebrity(c *gin.Context) {
 		Filter(dataframe.F{Colname: "IsFromMe", Comparator: series.Eq, Comparando: 1}).Col("ChatID").Records())
 
 	c.JSON(200, gin.H{
-		"biggest_fan":        mostCommon,
+		"celebrity":          mostCommon,
 		"number_of_messages": frequency,
 	})
 }
