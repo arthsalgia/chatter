@@ -3,9 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"time"
 
 	"github.com/arthsalgia/messages-api/controllers"
 	"github.com/arthsalgia/messages-api/services"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -28,6 +30,13 @@ func main() {
 
 	router := gin.Default()
 	router.SetTrustedProxies(nil)
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:5173"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 
 	router.GET("/get-all", controllers.GetAll)
 	router.GET("/best-friend", controllers.BestFriend)
