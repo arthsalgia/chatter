@@ -2,14 +2,16 @@ import { useState } from "react";
 import "./overview.css"
 
 import BestFriend from "../../bestFriend/bestFriend";
+import BiggestFan from "../../biggestFan/biggestFan"
 
 export default function Overview() {
-  const [startDate, setStartDate] = useState("");
 
   return (
-    <div>
+    <div className="overview-grid">
         
-    <BestFriend />
+        <BestFriend />
+        <BiggestFan />
+
     </div>
   );
 }
