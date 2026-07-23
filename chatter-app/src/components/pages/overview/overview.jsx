@@ -6,6 +6,7 @@ import BiggestFan from "../../biggestFan/biggestFan";
 import Celebrity from "../../celebrity/celebrity";
 import TopMessages from "../../topMessages/topMessages";
 import MostCommonWord from "../../mostCommonWord/mostCommonWord";
+import MostTextedDate from "../../mostTextedDate/mostTextedDate";
 
 export default function Overview() {
 
@@ -17,6 +18,7 @@ export default function Overview() {
         <Celebrity />
         <TopMessages />
         <MostCommonWord />
+        <MostTextedDate />
 
     </div>
   );
