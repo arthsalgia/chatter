@@ -3,8 +3,8 @@
 .celebrity-page {
   --ink: #241F3D;
   --muted: #8B87A3;
-  --accent: #FF4F87;
-  --accent-soft: #FFE3ED;
+  --accent: #4f69ff;
+  --accent-soft: #c7edfd;
   --violet: #6C5CE7;
   --bg: #FAF8FF;
   --card-bg: #FFFFFF;
@@ -30,7 +30,7 @@
 
 .celebrity-header {
   padding: 28px 32px 24px;
-  background: linear-gradient(135deg, var(--violet) 0%, var(--accent) 100%);
+  background: #89d0f9;
   color: white;
   display: flex;
   align-items: flex-start;

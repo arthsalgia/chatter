@@ -4,6 +4,7 @@ import "./overview.css"
 import BestFriend from "../../bestFriend/bestFriend";
 import BiggestFan from "../../biggestFan/biggestFan";
 import Celebrity from "../../celebrity/celebrity";
+import TopMessages from "../../topMessages/topMessages";
 
 export default function Overview() {
 
@@ -13,6 +14,7 @@ export default function Overview() {
         <BestFriend />
         <BiggestFan />
         <Celebrity />
+        <TopMessages />
 
     </div>
   );
