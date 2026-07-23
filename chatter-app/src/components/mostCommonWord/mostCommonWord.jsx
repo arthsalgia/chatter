@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import "./topMessages.css"
-import topMessagesApi from "../../hooks/topMessages";
+import "./mostCommonWord.css"
+import mostCommonWordApi from "../../hooks/mostCommonWord";
 
-export default function TopMessages() {
+export default function MostCommonWord() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [recordLimit, setRecordLimit] = useState(5);
@@ -14,7 +14,7 @@ export default function TopMessages() {
     async function getTopMessages() {
       try {
         setTopMessagesLoading(true);
-        const response = await topMessagesApi(startDate, endDate, recordLimit);
+        const response = await mostCommonWordApi(startDate, endDate, recordLimit);
         const messageRankings = response?.[0] ?? [];
         setTopMessages(messageRankings);
       }
@@ -40,7 +40,7 @@ export default function TopMessages() {
         <div className="bf-header">
           <div className="header-text">
             <div className="header-eyebrow">Message Stats</div>
-            <div className="header-title">Top Messages</div>
+            <div className="header-title">Top Words</div>
           </div>
 
           <button
@@ -54,7 +54,7 @@ export default function TopMessages() {
               <circle cx="10" cy="6.3" r="1" fill="currentColor" />
             </svg>
             <span className="info-tooltip">
-              Your most frequently sent messages between the given date fields.<br/>
+              Your most frequently used words between the given date fields.<br/>
               If dates are empty, checks for all dates.
             </span>
           </button>
@@ -100,7 +100,7 @@ export default function TopMessages() {
         </div>
 
         <div className="tm-result">
-          <div className="result-title">Your Most Common Messages</div>
+          <div className="result-title">Your Most Common Words</div>
 
           {topMessagesLoading ? (
             <div className="tm-skeleton">
