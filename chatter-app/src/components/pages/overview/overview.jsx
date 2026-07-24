@@ -7,6 +7,7 @@ import Celebrity from "../../celebrity/celebrity";
 import TopMessages from "../../topMessages/topMessages";
 import MostCommonWord from "../../mostCommonWord/mostCommonWord";
 import MostTextedDate from "../../mostTextedDate/mostTextedDate";
+import Search from "../../search/search";
 
 export default function Overview() {
 
@@ -19,6 +20,7 @@ export default function Overview() {
         <TopMessages />
         <MostCommonWord />
         <MostTextedDate />
+        <Search />
 
     </div>
   );
