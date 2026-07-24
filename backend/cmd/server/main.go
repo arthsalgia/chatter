@@ -46,6 +46,7 @@ func main() {
 	router.GET("/most-common-word", controllers.MostCommonWord)
 	router.GET("/most-texted-date", controllers.MostTextedDate)
 	router.GET("/search", controllers.Search)
+	router.GET("meta-data", controllers.MetaData)
 
 	router.Run(*portPtr)
 }
