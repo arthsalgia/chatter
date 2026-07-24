@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+.meta-page {
+  --ink: #241F3D;
+  --muted: #8B87A3;
+  --accent: #89d0f9;
+  --accent-soft: #eef8ff;
+  --bg: #FAF8FF;
+  --card-bg: #FFFFFF;
+  --border: #ECE9F7;
+
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+}
+
+.meta-header {
+  width: 100%;
+  max-width: 900px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px -20px rgba(108, 92, 231, 0.25);
+}
+
+/* Title row */
+.meta-title-row {
+  padding: 24px 32px;
+  background: var(--accent);
+  color: white;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: 20px 20px 0 0;
+}
+
+
+.header-text {
+  min-width: 0;
+}
+
+.header-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.header-title {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.8em;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Info button */
+.info-button {
+  position: relative;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.info-button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.info-button:hover,
+.info-button:focus-visible {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+.info-button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+.info-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: -6px;
+  width: 230px;
+  padding: 10px 12px;
+  background: var(--ink);
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px -6px rgba(36, 31, 61, 0.4);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.info-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 10px;
+  border: 6px solid transparent;
+  border-top-color: var(--ink);
+}
+
+.info-button:hover .info-tooltip,
+.info-button:focus-visible .info-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Totals row */
+.meta-totals {
+  display: flex;
+  padding: 28px 32px 20px;
+  gap: 16px;
+}
+
+.total-stat {
+  flex: 1;
+  text-align: center;
+  padding: 4px 8px;
+}
+
+.total-stat-main .total-value {
+  color: var(--accent);
+}
+
+.total-value {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.total-label {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+/* Share bar: your messages vs theirs */
+.meta-share-bar {
+  height: 6px;
+  margin: 0 32px 28px;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  overflow: hidden;
+}
+
+.meta-share-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+  transition: width 0.5s ease-out;
+}
+
+/* Comparison section */
+.meta-comparison {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  margin: 0 32px 28px;
+  padding: 20px 24px;
+  background: var(--accent-soft);
+  border-radius: 16px;
+}
+
+.comparison-column {
+  flex: 1;
+}
+
+.comparison-column-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.comparison-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 6px 0;
+}
+
+.comparison-label {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.comparison-value {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.comparison-divider {
+  width: 1px;
+  background: var(--border);
+}
+
+/* Loading skeleton */
+.meta-skeleton {
+  padding: 28px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skeleton-line {
+  border-radius: 10px;
+  background: linear-gradient(90deg, #ECE9F7 25%, #F7F3FF 50%, #ECE9F7 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+.skeleton-totals { height: 64px; }
+.skeleton-bar { height: 6px; }
+.skeleton-comparison { height: 100px; }
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-line { animation: none; }
+  .meta-share-fill { transition: none; }
+}
+
+/* Responsive: stack comparison columns on narrow screens */
+@media (max-width: 560px) {
+  .meta-totals {
+    flex-wrap: wrap;
+  }
+
+  .total-stat {
+    flex: 1 1 40%;
+  }
+
+  .meta-comparison {
+    flex-direction: column;
+  }
+
+  .comparison-divider {
+    width: 100%;
+    height: 1px;
+  }
+}

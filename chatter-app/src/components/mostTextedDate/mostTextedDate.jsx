@@ -54,7 +54,7 @@ export default function MostTextedDate() {
               <circle cx="10" cy="6.3" r="1" fill="currentColor" />
             </svg>
             <span className="info-tooltip">
-              Your most texted on date between the given date fields. Format YYYY-MM-DD<br/>
+              Your most texted on date between the given date fields. Format <br/>YYYY-MM-DD<br/>
               If dates are empty, checks for all dates.
             </span>
           </button>

@@ -1,9 +1,28 @@
 .overview-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  
+
   max-width: 1400px;
   margin: 0 auto;
+  padding: 24px;
+  gap: 24px;
+}
+
+.overview-grid > .meta-page {
+  grid-column: 1 / -1;
+}
+
+.overview-grid > .meta-page,
+.overview-grid > .bf-page,
+.overview-grid > .search-page {
   padding: 0;
-  gap: 0;
+  min-height: 0;
+  background: none;
+}
+
+.overview-grid > .meta-page > .meta-header,
+.overview-grid > .bf-page > .bf-card,
+.overview-grid > .search-page > .search-card {
+  max-width: none;
+  width: 100%;
 }
