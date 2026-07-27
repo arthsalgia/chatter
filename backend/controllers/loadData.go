@@ -16,12 +16,41 @@ var blobRegex = regexp.MustCompile(`[\x20-\x7E\x{2010}-\x{201F}\x{2026}]{2,}`)
 
 func LoadAllMessages() bool {
 	var messages []models.MessagesAll
+	var chat []models.Chat
 	services.DB.Order("ROWID desc").Find(&messages)
+	services.DB.Order("ROWID desc").Find(&chat)
 
 	var count int64
 	err := services.DB.Table("message").Count(&count).Error
 	if err != nil {
 		return false
+	}
+	chatErr := services.DB.Table("chat").Count(&count).Error
+	if chatErr != nil {
+		return false
+	}
+
+	type Chat struct {
+		ID          int    `json:"id"`
+		GroupID     string `json:"group_id"`
+		DisplayName string `json:"display_name"`
+	}
+
+	flatChat := make([]Chat, 0, len(chat))
+
+	for i, c := range chat {
+		if len(c.DisplayName) > 0 {
+			flatChat = append(flatChat, Chat{
+				ID:          i,
+				GroupID:     c.GroupID,
+				DisplayName: c.DisplayName,
+			})
+		}
+	}
+
+	groupToDisplay := make(map[string]string, len(flatChat))
+	for _, c := range flatChat {
+		groupToDisplay[c.GroupID] = c.DisplayName
 	}
 
 	type FlatMessage struct {
@@ -37,6 +66,7 @@ func LoadAllMessages() bool {
 
 	macEpoch := time.Date(2001, 1, 1, 0, 0, 0, 0, time.UTC)
 
+	const imessagePrefix = "iMessage;-;"
 	for i, m := range messages {
 		var decoded string
 		var text string
@@ -57,10 +87,14 @@ func LoadAllMessages() bool {
 			}
 		}
 
-		if len(m.Ck_chat_id) >= 11 {
-			c_id = m.Ck_chat_id[11:]
+		if strings.HasPrefix(m.Ck_chat_id, imessagePrefix) {
+			c_id = m.Ck_chat_id[len(imessagePrefix):]
 		} else {
 			c_id = m.Ck_chat_id
+		}
+
+		if display, ok := groupToDisplay[c_id]; ok {
+			c_id = display
 		}
 
 		text = services.ParseMessage(text)
