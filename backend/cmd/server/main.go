@@ -14,7 +14,6 @@ import (
 func main() {
 
 	dbPathPtr := flag.String("db", "./chat.db", "path to the iMessage SQLite chat file")
-	portPtr := flag.String("port", ":8000", "The port for the API server to run on")
 	flag.Parse()
 
 	fmt.Println("Starting server...")
@@ -48,5 +47,5 @@ func main() {
 	router.GET("/search", controllers.Search)
 	router.GET("meta-data", controllers.MetaData)
 
-	router.Run(*portPtr)
+	router.Run("8000")
 }

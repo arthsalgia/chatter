@@ -9,7 +9,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="app-layout">
-        <Sidebar />
 
         <div className="app-main">
           <Header />

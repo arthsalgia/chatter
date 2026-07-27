@@ -1,0 +1,106 @@
+/* Overlay */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Modal Box */
+.modal-content {
+  position: relative;
+  background-color: #bde4ff;
+  width: 90%;
+  max-width: 620px;
+  padding: 40px 30px 25px;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  color: #2b3648;
+  text-align: center;
+}
+
+/* Close Button */
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #ffffff;
+  color: #ff5c5c;
+  border: none;
+  border-radius: 6px;
+  width: 26px;
+  height: 26px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  line-height: 1;
+}
+
+/* Typography & Layout */
+.modal-body h2 {
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+  color: #1a2332;
+}
+
+.subtitle {
+  margin-top: 0;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(71, 85, 105, 0.2);
+  color: #4a5568;
+  font-size: 1.05rem;
+}
+
+.intro-text {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.modal-body p {
+  margin: 0 0 20px 0;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  color: #2b3648;
+}
+
+/* Clean Footer & Links (Matches Image) */
+.modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(71, 85, 105, 0.2);
+  font-size: 0.95rem;
+  color: #2b3648;
+}
+
+.modal-footer a {
+  color: #1d4ed8; /* Matched link blue */
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.modal-footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-fact {
+  color: #2b3648;
+}

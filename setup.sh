@@ -10,14 +10,6 @@ LOCAL_FILE="./chat.db"
 SYSTEM_SOURCE="$HOME/Library/Messages/chat.db"
 DB_DEST="./local_chat.db"
 
-PORT_NUMBER="${1:-8000}"
-
-if ! [[ "$PORT_NUMBER" =~ ^[0-9]+$ ]]; then
-    echo "❌ ERROR: '$PORT_NUMBER' is not a valid port number."
-    echo "Usage: ./setup.sh [port_number] (e.g., ./setup.sh 8080)"
-    exit 1
-fi
-
 if [ -f "$LOCAL_FILE" ]; then
     echo "Found local file at $LOCAL_FILE. Prioritizing local data..."
     
@@ -63,7 +55,7 @@ echo ""
 
 
 if [ -f "./server_mac" ]; then
-    ./server_mac -db="$DB_DEST" -port=":$PORT_NUMBER"
+    ./server_mac -db="$DB_DEST"
 else
-    go run ./cmd/server/main.go -db="$DB_DEST" -port=":$PORT_NUMBER"
+    go run ./cmd/server/main.go -db="$DB_DEST"
 fi
