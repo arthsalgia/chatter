@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"io/fs"
 	"net/http"
+	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/arthsalgia/messages-api/controllers"
@@ -18,8 +20,49 @@ import (
 var frontendFiles embed.FS
 
 func main() {
+	homeDir, err := os.UserHomeDir()
+	defaultIMessagePath := ""
+	if err == nil {
+		defaultIMessagePath = filepath.Join(homeDir, "Library", "Messages", "chat.db")
+	}
+
 	dbPathPtr := flag.String("db", "./chat.db", "path to the iMessage SQLite chat file")
 	flag.Parse()
+
+	dbPath := *dbPathPtr
+
+	if *dbPathPtr == "./chat.db" {
+		if _, err := os.Stat("./chat.db"); err == nil {
+			dbPath = "./chat.db"
+			fmt.Println("Found local copy of chat.db in current directory.")
+		} else if defaultIMessagePath != "" {
+			if _, err := os.Stat(defaultIMessagePath); err == nil {
+				testFile, readErr := os.Open(defaultIMessagePath)
+				if readErr == nil {
+					testFile.Close()
+					dbPath = defaultIMessagePath
+					fmt.Println("Access granted to system iMessage database.")
+				}
+			}
+		}
+	}
+
+	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
+		fmt.Println("\nError: iMessage database could not be found or accessed!")
+		fmt.Println("--------------------------------------------------------------------------------")
+		fmt.Println("To use Chatter, please choose ONE of the following options:")
+		fmt.Println("")
+		fmt.Println("  Option 1 (Easiest):")
+		fmt.Println("  Copy your 'chat.db' file into the folder you are currently running 'chatter' from.")
+		fmt.Println("  (You can find it on your Mac at: ~/Library/Messages/chat.db)")
+		fmt.Println("")
+		fmt.Println("  Option 2:")
+		fmt.Println("  Grant your Terminal (or iTerm) 'Full Disk Access' via:")
+		fmt.Println("  System Settings -> Privacy & Security -> Full Disk Access")
+		fmt.Println("--------------------------------------------------------------------------------")
+		fmt.Println("Stopping application...")
+		os.Exit(1)
+	}
 
 	fmt.Println("Starting server...")
 	fmt.Println("Reading through", *dbPathPtr, "...")
@@ -42,7 +85,6 @@ func main() {
 		MaxAge:           12 * time.Hour,
 	}))
 
-	// 1. Register API Routes first
 	api := router.Group("/api")
 	{
 		api.GET("/hello", func(c *gin.Context) {
@@ -59,7 +101,6 @@ func main() {
 		api.GET("/meta-data", controllers.MetaData)
 	}
 
-	// 2. Embedded React Frontend Setup
 	distFS, err := fs.Sub(frontendFiles, "chatter-app/dist")
 	if err != nil {
 		panic(err)
@@ -67,22 +108,18 @@ func main() {
 
 	assetServer := http.FileServer(http.FS(distFS))
 
-	// 3. Serve static files and handle SPA routes safely via NoRoute (avoids router prefix crashes)
 	router.NoRoute(func(c *gin.Context) {
 		path := c.Request.URL.Path
 
-		// Guard: Never catch API routes here
 		if len(path) >= 4 && path[:4] == "/api" {
 			c.JSON(http.StatusNotFound, gin.H{"error": "API route not found"})
 			return
 		}
 
-		// Check if the requested static file exists in the embedded dist folder (e.g., JS, CSS, favicon)
 		filePath := path
 		if filePath == "/" {
 			filePath = "index.html"
 		} else {
-			// strip leading slash for fs.Open
 			filePath = path[1:]
 		}
 
@@ -93,7 +130,6 @@ func main() {
 			return
 		}
 
-		// Fallback to index.html for React Router client-side routes
 		indexFile, err := distFS.Open("index.html")
 		if err != nil {
 			c.String(http.StatusNotFound, "React build index.html not found")
@@ -105,6 +141,6 @@ func main() {
 		c.DataFromReader(http.StatusOK, stat.Size(), "text/html; charset=utf-8", indexFile, map[string]string{})
 	})
 
-	fmt.Println("🚀 Server running on http://localhost:8000")
+	fmt.Println("Server running on http://localhost:8000")
 	router.Run(":8000")
 }
