@@ -1,4 +1,7 @@
 # Binaries for programs and plugins
+dist/
+*.zip
+*.tar.gz
 server
 server_mac
 *.exe
@@ -32,6 +35,7 @@ server_mac
 *.sqlite
 *.sqlite3
 .DS_Store
+
 # GIN Logs
 *.log
 logs/
