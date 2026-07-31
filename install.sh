@@ -28,8 +28,17 @@ curl -L -o "$TMP_DIR/$ZIP_NAME" "$URL"
 echo "Unpacking..."
 unzip -q "$TMP_DIR/$ZIP_NAME" -d "$TMP_DIR"
 
+# Find the executable file inside the extracted temp directory
+EXTRACTED_BINARY=$(find "$TMP_DIR" -type f -perm +111 ! -name "*.zip" | head -n 1)
+
+if [ -z "$EXTRACTED_BINARY" ]; then
+    echo "Error: Could not find the compiled binary inside the downloaded zip."
+    rm -rf "$TMP_DIR"
+    exit 1
+fi
+
 echo "Installing to /usr/local/bin..."
-sudo mv "$TMP_DIR/$BINARY_NAME" /usr/local/bin/$BINARY_NAME
+sudo mv "$EXTRACTED_BINARY" /usr/local/bin/$BINARY_NAME
 sudo chmod +x /usr/local/bin/$BINARY_NAME
 
 # Clear macOS quarantine flag so it doesn't block the app
