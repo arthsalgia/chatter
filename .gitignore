@@ -9,6 +9,7 @@ server_mac
 *.dll
 *.so
 *.dylib
+messages-api
 
 # Test binary
 *.test
