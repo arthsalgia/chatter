@@ -28,17 +28,17 @@ curl -L -o "$TMP_DIR/$ZIP_NAME" "$URL"
 echo "Unpacking..."
 unzip -q "$TMP_DIR/$ZIP_NAME" -d "$TMP_DIR"
 
-# Direct path to the extracted binary
-EXTRACTED_BINARY="$TMP_DIR/$BINARY_NAME"
+# Find the first file inside the temp directory that isn't the zip file
+EXTRACTED_FILE=$(find "$TMP_DIR" -maxdepth 2 -type f ! -name "*.zip" | head -n 1)
 
-if [ ! -f "$EXTRACTED_BINARY" ]; then
-    echo "Error: Could not find '$BINARY_NAME' inside the downloaded zip."
+if [ -z "$EXTRACTED_FILE" ]; then
+    echo "Error: No files found inside the downloaded zip."
     rm -rf "$TMP_DIR"
     exit 1
 fi
 
 echo "Installing to /usr/local/bin..."
-sudo mv "$EXTRACTED_BINARY" /usr/local/bin/$BINARY_NAME
+sudo mv "$EXTRACTED_FILE" /usr/local/bin/$BINARY_NAME
 sudo chmod +x /usr/local/bin/$BINARY_NAME
 
 # Clear macOS quarantine flag so it doesn't block the app
