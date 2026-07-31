@@ -28,11 +28,11 @@ curl -L -o "$TMP_DIR/$ZIP_NAME" "$URL"
 echo "Unpacking..."
 unzip -q "$TMP_DIR/$ZIP_NAME" -d "$TMP_DIR"
 
-# Find the executable file inside the extracted temp directory
-EXTRACTED_BINARY=$(find "$TMP_DIR" -type f -perm +111 ! -name "*.zip" | head -n 1)
+# Direct path to the extracted binary
+EXTRACTED_BINARY="$TMP_DIR/$BINARY_NAME"
 
-if [ -z "$EXTRACTED_BINARY" ]; then
-    echo "Error: Could not find the compiled binary inside the downloaded zip."
+if [ ! -f "$EXTRACTED_BINARY" ]; then
+    echo "Error: Could not find '$BINARY_NAME' inside the downloaded zip."
     rm -rf "$TMP_DIR"
     exit 1
 fi
