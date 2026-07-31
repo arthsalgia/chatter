@@ -77,11 +77,11 @@ export default function MetaDataHeader() {
               </div>
               <div className="total-stat">
                 <div className="total-value">{messagesFromMe.toLocaleString()}</div>
-                <div className="total-label">Your Messages</div>
+                <div className="total-label">Messages Sent</div>
               </div>
               <div className="total-stat">
                 <div className="total-value">{messagesFromOthers.toLocaleString()}</div>
-                <div className="total-label">Their Messages</div>
+                <div className="total-label">Messages Received</div>
               </div>
             </div>
 
@@ -108,7 +108,7 @@ export default function MetaDataHeader() {
               <div className="comparison-divider" />
 
               <div className="comparison-column">
-                <div className="comparison-column-title">Them</div>
+                <div className="comparison-column-title">Sent to you</div>
                 <div className="comparison-row">
                   <span className="comparison-label">Avg Length (char)</span>
                   <span className="comparison-value">{avgLengthOther}</span>
