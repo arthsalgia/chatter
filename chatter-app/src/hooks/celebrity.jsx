@@ -7,7 +7,7 @@ export default async function celebrity(from, to) {
   }
 
   const res = await fetch(
-    `http://localhost:8000/celebrity?from=${from}&to=${to}`,
+    `http://localhost:8000/api/celebrity?from=${from}&to=${to}`,
     {
       method: "GET",
     }

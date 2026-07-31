@@ -10,7 +10,7 @@ export default async function mostTextedDate(from, to, n) {
   }
 
   const res = await fetch(
-    `http://localhost:8000/most-texted-date?from=${from}&to=${to}&n=${n}`,
+    `http://localhost:8000/api/most-texted-date?from=${from}&to=${to}&n=${n}`,
     {
       method: "GET",
     }

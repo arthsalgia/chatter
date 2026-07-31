@@ -2,7 +2,7 @@ export default async function search() {
 
 
   const res = await fetch(
-    `http://localhost:8000/meta-data`,
+    `http://localhost:8000/api/meta-data`,
     {
       method: "GET",
     }

@@ -10,7 +10,7 @@ export default async function mostCommonWord(from, to, n) {
   }
 
   const res = await fetch(
-    `http://localhost:8000/most-common-word?from=${from}&to=${to}&n=${n}`,
+    `http://localhost:8000/api/most-common-word?from=${from}&to=${to}&n=${n}`,
     {
       method: "GET",
     }

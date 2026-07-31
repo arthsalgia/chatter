@@ -7,7 +7,7 @@ export default async function bestFriend(from, to) {
   }
 
   const res = await fetch(
-    `http://localhost:8000/best-friend?from=${from}&to=${to}`,
+    `http://localhost:8000/api/best-friend?from=${from}&to=${to}`,
     {
       method: "GET",
     }

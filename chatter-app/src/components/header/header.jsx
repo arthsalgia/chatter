@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AboutModal from "./about/about";
+import logo from "../../assets/chatterIcon.png"
 import "./Header.css";
 
 export default function Header() {
@@ -10,7 +11,7 @@ export default function Header() {
       <div className="header">
         <div className="brand">
           <img
-            src={"src/assets/chatterIcon.png"}
+            src={logo}
             alt="Home"
             className={"brand-icon-full"}
           />

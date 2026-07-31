@@ -10,7 +10,7 @@ export default async function topMessages(from, to, n) {
   }
 
   const res = await fetch(
-    `http://localhost:8000/nth-common?from=${from}&to=${to}&n=${n}`,
+    `http://localhost:8000/api/nth-common?from=${from}&to=${to}&n=${n}`,
     {
       method: "GET",
     }

@@ -10,7 +10,7 @@ export default async function search(from, to, word) {
   }
 
   const res = await fetch(
-    `http://localhost:8000/search?from=${from}&to=${to}&word=${word}`,
+    `http://localhost:8000/api/search?from=${from}&to=${to}&word=${word}`,
     {
       method: "GET",
     }

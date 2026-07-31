@@ -14,7 +14,7 @@ export default function App() {
 
           <main className="app-content">
             <Routes>
-              <Route path="/dashboard" element={<Overview />} />
+              <Route path="/" element={<Overview />} />
             </Routes>
           </main>
         </div>
