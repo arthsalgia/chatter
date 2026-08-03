@@ -3,7 +3,7 @@
 .bf-page {
   --ink: #241F3D;
   --muted: #8B87A3;
-  --accent: #4f69ff;
+  --accent: #45b2f2;
   --accent-soft: #c7edfd;
   --violet: #6C5CE7;
   --bg: #FAF8FF;
@@ -183,11 +183,16 @@
 }
 
 /* Result: list card */
-.tm-result {
+.celebrity-result {
   margin: 20px 32px 32px;
   padding: 20px 20px 12px;
   background: var(--accent-soft);
   border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;    
+  justify-content: center;
+  text-align: center;
 }
 
 .result-title {

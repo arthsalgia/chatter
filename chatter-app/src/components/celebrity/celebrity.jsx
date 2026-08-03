@@ -204,7 +204,7 @@ export default function Celebrity() {
 
 
 
-        <div className="tm-result">
+        <div className="celebrity-result">
 
 
           {celebrityLoading ? (
