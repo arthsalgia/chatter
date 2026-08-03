@@ -8,7 +8,7 @@ import (
 	"github.com/go-gota/gota/series"
 )
 
-func longestMessage() (string, string) {
+func longestMessage() (string, string, []string, []string) {
 	TextMe := MessagesDF.Filter(dataframe.F{Colname: "IsFromMe", Comparator: series.Eq, Comparando: 1}).Col("Text")
 
 	var longestTextMe string
@@ -22,6 +22,8 @@ func longestMessage() (string, string) {
 		}
 	}
 
+	sentTo := MessagesDF.Filter(dataframe.F{Colname: "Text", Comparator: series.Eq, Comparando: longestTextMe}).Col("ChatID").Records()
+
 	TextOther := MessagesDF.Filter(dataframe.F{Colname: "IsFromMe", Comparator: series.Eq, Comparando: 0}).Col("Text")
 
 	var longestTextOther string
@@ -34,8 +36,9 @@ func longestMessage() (string, string) {
 			longestTextOther = val
 		}
 	}
+	sentBy := MessagesDF.Filter(dataframe.F{Colname: "Text", Comparator: series.Eq, Comparando: longestTextOther}).Col("ChatID").Records()
 
-	return longestTextMe, longestTextOther
+	return longestTextMe, longestTextOther, sentTo, sentBy
 }
 
 func MetaData(c *gin.Context) {
@@ -89,7 +92,7 @@ func MetaData(c *gin.Context) {
 		Comparator: series.Eq,
 		Comparando: 0}).Nrow()
 
-	longestTextMe, longestTextOther := longestMessage()
+	longestTextMe, longestTextOther, sentTo, sentBy := longestMessage()
 
 	c.JSON(200, gin.H{
 		"total_messages":        totalMessagesMe + totalMessagesOther,
@@ -101,5 +104,7 @@ func MetaData(c *gin.Context) {
 		"max_len_other":         maxLenOther,
 		"longestTextMe":         longestTextMe,
 		"longestTextOther":      longestTextOther,
+		"sentTo":                sentTo[0],
+		"sentBy":                sentBy[0],
 	})
 }
