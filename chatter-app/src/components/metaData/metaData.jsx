@@ -6,6 +6,9 @@ export default function MetaDataHeader() {
   const [metaData, setMetaData] = useState(null);
   const [metaDataLoading, setMetaDataLoading] = useState(false);
 
+  const [showLongestMe, setShowLongestMe] = useState(false);
+  const [showLongestOther, setShowLongestOther] = useState(false);
+
   useEffect(() => {
     async function getMetaData() {
       try {
@@ -32,6 +35,9 @@ export default function MetaDataHeader() {
   const avgLengthOther = metaData?.avg_len_other ?? 0;
   const maxLengthMe = metaData?.max_len_me ?? 0;
   const maxLengthOther = metaData?.max_len_other ?? 0;
+
+  const longestTextMe = metaData?.longestTextMe ?? "";
+  const longestTextOther = metaData?.longestTextOther ?? "";
 
   const myShare = totalMessages
     ? (messagesFromMe / totalMessages) * 100
@@ -99,10 +105,32 @@ export default function MetaDataHeader() {
                   <span className="comparison-label">Avg Length (char)</span>
                   <span className="comparison-value">{avgLengthMe}</span>
                 </div>
-                <div className="comparison-row">
+
+                <button
+                  type="button"
+                  className="comparison-row comparison-row-toggle"
+                  onClick={() => setShowLongestMe((open) => !open)}
+                  aria-expanded={showLongestMe}
+                >
                   <span className="comparison-label">Longest Message (char)</span>
-                  <span className="comparison-value">{maxLengthMe.toLocaleString()}</span>
-                </div>
+                  <span className="comparison-value-group">
+                    <span className="comparison-value">{maxLengthMe.toLocaleString()}</span>
+                    <svg
+                      className={`toggle-chevron ${showLongestMe ? "toggle-chevron-open" : ""}`}
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </button>
+
+                {showLongestMe && (
+                  <div className="longest-message-popup">
+                    {longestTextMe || "No message found."}
+                  </div>
+                )}
               </div>
 
               <div className="comparison-divider" />
@@ -113,10 +141,32 @@ export default function MetaDataHeader() {
                   <span className="comparison-label">Avg Length (char)</span>
                   <span className="comparison-value">{avgLengthOther}</span>
                 </div>
-                <div className="comparison-row">
+
+                <button
+                  type="button"
+                  className="comparison-row comparison-row-toggle"
+                  onClick={() => setShowLongestOther((open) => !open)}
+                  aria-expanded={showLongestOther}
+                >
                   <span className="comparison-label">Longest Message (char)</span>
-                  <span className="comparison-value">{maxLengthOther.toLocaleString()}</span>
-                </div>
+                  <span className="comparison-value-group">
+                    <span className="comparison-value">{maxLengthOther.toLocaleString()}</span>
+                    <svg
+                      className={`toggle-chevron ${showLongestOther ? "toggle-chevron-open" : ""}`}
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </button>
+
+                {showLongestOther && (
+                  <div className="longest-message-popup">
+                    {longestTextOther || "No message found."}
+                  </div>
+                )}
               </div>
             </div>
           </>

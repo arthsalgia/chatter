@@ -8,6 +8,36 @@ import (
 	"github.com/go-gota/gota/series"
 )
 
+func longestMessage() (string, string) {
+	TextMe := MessagesDF.Filter(dataframe.F{Colname: "IsFromMe", Comparator: series.Eq, Comparando: 1}).Col("Text")
+
+	var longestTextMe string
+	maxLenMe := 0
+
+	for i := 0; i < TextMe.Len(); i++ {
+		val := TextMe.Elem(i).Val().(string)
+		if len(val) > maxLenMe {
+			maxLenMe = len(val)
+			longestTextMe = val
+		}
+	}
+
+	TextOther := MessagesDF.Filter(dataframe.F{Colname: "IsFromMe", Comparator: series.Eq, Comparando: 0}).Col("Text")
+
+	var longestTextOther string
+	maxLenOther := 0
+
+	for i := 0; i < TextOther.Len(); i++ {
+		val := TextOther.Elem(i).Val().(string)
+		if len(val) > maxLenOther {
+			maxLenOther = len(val)
+			longestTextOther = val
+		}
+	}
+
+	return longestTextMe, longestTextOther
+}
+
 func MetaData(c *gin.Context) {
 
 	colMe := MessagesDF.Filter(dataframe.F{
@@ -59,6 +89,8 @@ func MetaData(c *gin.Context) {
 		Comparator: series.Eq,
 		Comparando: 0}).Nrow()
 
+	longestTextMe, longestTextOther := longestMessage()
+
 	c.JSON(200, gin.H{
 		"total_messages":        totalMessagesMe + totalMessagesOther,
 		"total_messages_me":     totalMessagesMe,
@@ -67,5 +99,7 @@ func MetaData(c *gin.Context) {
 		"max_len_me":            maxLenMe,
 		"avg_len_other":         fmt.Sprintf("%.1f", avgLenOther),
 		"max_len_other":         maxLenOther,
+		"longestTextMe":         longestTextMe,
+		"longestTextOther":      longestTextOther,
 	})
 }
