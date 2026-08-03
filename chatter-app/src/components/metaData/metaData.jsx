@@ -39,6 +39,10 @@ export default function MetaDataHeader() {
   const longestTextMe = metaData?.longestTextMe ?? "";
   const longestTextOther = metaData?.longestTextOther ?? "";
 
+  // Who the longest message from you was sent to, and who sent you the longest message
+  const sentTo = metaData?.sentTo ?? "";
+  const sentBy = metaData?.sentBy ?? "";
+
   const myShare = totalMessages
     ? (messagesFromMe / totalMessages) * 100
     : 0;
@@ -128,6 +132,9 @@ export default function MetaDataHeader() {
 
                 {showLongestMe && (
                   <div className="longest-message-popup">
+                    {sentTo && (
+                      <div className="longest-message-meta">Sent to {sentTo}</div>
+                    )}
                     {longestTextMe || "No message found."}
                   </div>
                 )}
@@ -164,6 +171,9 @@ export default function MetaDataHeader() {
 
                 {showLongestOther && (
                   <div className="longest-message-popup">
+                    {sentBy && (
+                      <div className="longest-message-meta">From {sentBy}</div>
+                    )}
                     {longestTextOther || "No message found."}
                   </div>
                 )}

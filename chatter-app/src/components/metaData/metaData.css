@@ -2,7 +2,7 @@
 
 .meta-page {
   --ink: #241F3D;
-  --muted: #8B87A3;
+  --muted: #7c7990;
   --accent: #89d0f9;
   --accent-soft: #eef8ff;
   --bg: #FAF8FF;
@@ -348,4 +348,13 @@
 
 .comparison-row-toggle:hover .toggle-chevron {
   color: var(--accent);
+}
+
+.longest-message-meta {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #225ed7;
+  margin-bottom: 6px;
 }
