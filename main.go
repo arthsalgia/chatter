@@ -88,7 +88,7 @@ func main() {
 	api := router.Group("/api")
 	{
 		api.GET("/hello", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{"message": "Hello from the Go API!"})
+			c.JSON(http.StatusOK, gin.H{"message": "Hello from Chatter!"})
 		})
 		api.GET("/get-all", controllers.GetAll)
 		api.GET("/best-friend", controllers.BestFriend)

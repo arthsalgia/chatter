@@ -23,28 +23,28 @@ func ConnectDb(file string) {
 			LogLevel:      logger.Warn,
 		},
 	)
+
 	if file == "" {
 		homeDir, err := os.UserHomeDir()
-
 		if err != nil {
 			log.Fatalf("Failed to detect home directory: %v", err)
 		}
 
-		dbPath := filepath.Join(homeDir, "Library", "Messages", "chat.db")
+		dbPath := filepath.Join(homeDir, "Library", "Messages", "chat.db") + "?mode=ro"
 
 		DB, err = gorm.Open(sqlite.Open(dbPath), &gorm.Config{Logger: newLogger})
-
 		if err != nil {
-			log.Fatalf("Failed to connect to database: %v", err)
+			log.Fatalf("Failed to connect to database (Check if Terminal has Full Disk Access): %v", err)
 		}
 
 		fmt.Println("Successfully connected to database at ~/Library/Messages/chat.db")
 	} else {
 		var err error
-		DB, err = gorm.Open(sqlite.Open(file), &gorm.Config{Logger: newLogger})
-		if err != nil {
+		dbPath := file + "?mode=ro"
 
-			log.Fatalf("Failed to connect to database: %v", err)
+		DB, err = gorm.Open(sqlite.Open(dbPath), &gorm.Config{Logger: newLogger})
+		if err != nil {
+			log.Fatalf("Failed to connect to database at %s: %v", file, err)
 		}
 
 		fmt.Println("Successfully connected to database at", file)
