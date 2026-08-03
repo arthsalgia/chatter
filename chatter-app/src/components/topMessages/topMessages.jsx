@@ -100,7 +100,7 @@ export default function TopMessages() {
         </div>
 
         <div className="tm-result">
-          <div className="result-title">Your Most Common Messages</div>
+          <div className="result-title">Your Most Texted People</div>
 
           {topMessagesLoading ? (
             <div className="tm-skeleton">

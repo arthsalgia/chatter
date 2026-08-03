@@ -1,4 +1,4 @@
-export default async function search(from, to, word) {
+export default async function search(from, to, word, partial) {
   if (from == "") {
     from = "2001-01-01"
   }
@@ -10,7 +10,7 @@ export default async function search(from, to, word) {
   }
 
   const res = await fetch(
-    `http://localhost:8000/api/search?from=${from}&to=${to}&word=${word}`,
+    `http://localhost:8000/api/search?from=${from}&to=${to}&word=${word}&partial=${partial}`,
     {
       method: "GET",
     }

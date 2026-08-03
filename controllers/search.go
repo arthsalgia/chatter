@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"regexp"
 	"strings"
 	"time"
 
@@ -10,15 +11,29 @@ import (
 )
 
 func Search(c *gin.Context) {
+	partial := c.Query("partial")
 	word := c.Query("word")
 	fromDate := c.DefaultQuery("from", "2000-01-01")
 	toDate := c.DefaultQuery("to", time.Now().Format("2006-01-02"))
 
-	containsWord := func(el series.Element) bool {
-		if val, ok := el.Val().(string); ok {
-			return strings.Contains(val, word)
+	var containsWord func(series.Element) bool
+
+	if partial == "true" {
+		containsWord = func(el series.Element) bool {
+			if val, ok := el.Val().(string); ok {
+				return strings.Contains(val, word)
+			}
+			return false
 		}
-		return false
+	} else {
+		containsWord = func(el series.Element) bool {
+			if val, ok := el.Val().(string); ok {
+				pattern := `\b` + regexp.QuoteMeta(word) + `\b`
+				re := regexp.MustCompile(pattern)
+				return re.MatchString(val)
+			}
+			return false
+		}
 	}
 
 	countOther := MessagesDF.

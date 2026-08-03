@@ -6,6 +6,7 @@ export default function Search() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [word, setWord] = useState("");
+  const [partial, setPartial] = useState(false);
 
   const [total, setTotal] = useState(0);
   const [fromMe, setFromMe] = useState(0);
@@ -18,7 +19,7 @@ export default function Search() {
       try {
         setSearchLoading(true);
 
-        const response = await searchApi(startDate, endDate, word);
+        const response = await searchApi(startDate, endDate, word, partial);
 
         setTotal(response.total ?? 0);
         setFromMe(response.from_me ?? 0);
@@ -31,7 +32,7 @@ export default function Search() {
     }
 
     getSearchResults();
-  }, [startDate, endDate, word]);
+  }, [startDate, endDate, word, partial]);
 
   return (
     <div className="search-page">
@@ -114,14 +115,41 @@ export default function Search() {
               Search Word
             </label>
 
-            <input
-              id="search-word"
-              type="text"
-              className="date-input"
-              placeholder=""
-              value={word}
-              onChange={(e) => setWord(e.target.value)}
-            />
+            <div className="search-word-row">
+              <input
+                id="search-word"
+                type="text"
+                className="date-input search-word-input"
+                placeholder=""
+                value={word}
+                onChange={(e) => setWord(e.target.value)}
+              />
+
+              <label className="partial-toggle-label" title="Enable partial matching">
+                <input
+                  type="checkbox"
+                  className="partial-checkbox"
+                  checked={partial}
+                  onChange={(e) => setPartial(e.target.checked)}
+                />
+                <span className="partial-custom-tick">
+                  <svg
+                    viewBox="0 0 12 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1 5L4.5 8.5L11 1.5"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+                <span className="partial-text">Partial</span>
+              </label>
+            </div>
           </div>
         </div>
 

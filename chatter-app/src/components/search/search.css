@@ -278,3 +278,55 @@
     flex-direction: column;
   }
 }
+
+.search-word-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-word-input {
+  flex: 1;
+  max-width: 70%;
+}
+
+.partial-toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+}
+
+.partial-checkbox {
+  display: none;
+}
+
+.partial-custom-tick {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e1;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.partial-custom-tick svg {
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.partial-checkbox:checked + .partial-custom-tick {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.partial-checkbox:checked + .partial-custom-tick svg {
+  opacity: 1;
+  color: #ffffff;
+}
