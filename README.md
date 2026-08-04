@@ -28,6 +28,11 @@ To run the analyzer, the application needs access to your iMessage database. On 
 1. **Local copy (recommended):** Place a copy of your `chat.db` file into the directory you're running the command from. You can find your system database at `~/Library/Messages/chat.db`.
 2. **Full Disk Access:** Grant your Terminal application Full Disk Access via **System Settings → Privacy & Security → Full Disk Access** so it can read the system database directly.
 
+### Where to find my chat.db file?
+``` bash
+~/Library/Messages/chat.db
+```
+
 ### Running the Application
 
 Once installed and your database is set up, just run:
