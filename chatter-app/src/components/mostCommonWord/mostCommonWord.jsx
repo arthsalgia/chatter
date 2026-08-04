@@ -40,7 +40,7 @@ export default function MostCommonWord() {
         <div className="bf-header">
           <div className="header-text">
             <div className="header-eyebrow">Message Stats</div>
-            <div className="header-title">Top Words</div>
+            <div className="header-title">Most Used Phrases</div>
           </div>
 
           <button
