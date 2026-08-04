@@ -40,7 +40,7 @@ export default function TopMessages() {
         <div className="bf-header">
           <div className="header-text">
             <div className="header-eyebrow">Message Stats</div>
-            <div className="header-title">Top Messages</div>
+            <div className="header-title">Top Chats</div>
           </div>
 
           <button
