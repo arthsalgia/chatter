@@ -100,7 +100,7 @@ export default function MostTextedDate() {
         </div>
 
         <div className="tm-result">
-          <div className="result-title">Your Most Common Dates</div>
+          <div className="result-title">Your Most Texted Dates</div>
 
           {topMessagesLoading ? (
             <div className="tm-skeleton">
