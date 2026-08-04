@@ -113,7 +113,7 @@ export default function BiggestFan() {
             </div>
           ) : (
             <>
-              <div className="result-title">Your Best Friend</div>
+              <div className="result-title">Your Biggest Fan</div>
               <div className="result-name">
                 {bf || "—"}
                 <span className="result-underline" aria-hidden="true" />
