@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+.sentiment-page {
+  --ink: #241F3D;
+  --muted: #8B87A3;
+  --accent: #89d0f9;
+  --accent-soft: #eef8ff;
+  --bg: #FAF8FF;
+  --card-bg: #FFFFFF;
+  --border: #ECE9F7;
+
+  min-height: 100%;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+}
+
+.sentiment-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px -20px rgba(108, 92, 231, 0.25);
+}
+
+.sentiment-header {
+  padding: 28px 32px 24px;
+  background: var(--accent);
+  color: white;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: 20px 20px 0 0;
+}
+
+.header-text {
+  min-width: 0;
+}
+
+.header-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.header-title {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 2em;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.info-button {
+  position: relative;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.info-button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.info-button:hover,
+.info-button:focus-visible {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+.info-button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+.info-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: -6px;
+  width: 230px;
+  padding: 10px 12px;
+  background: var(--ink);
+  color: white;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+  box-shadow: 0 8px 20px -6px rgba(36, 31, 61, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.info-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 12px;
+  border: 6px solid transparent;
+  border-top-color: var(--ink);
+}
+
+.info-button:hover .info-tooltip,
+.info-button:focus-visible .info-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.chat-search-section {
+  padding: 24px 32px 8px;
+}
+
+.sentiment-field-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.sentiment-field-label {
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.sentiment-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: #FCFBFF;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  color: var(--ink);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sentiment-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(137, 208, 249, 0.25);
+}
+
+.sentiment-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.chat-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 12px 24px -12px rgba(36, 31, 61, 0.25);
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.chat-dropdown-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  color: var(--ink);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-dropdown-item:hover {
+  background: var(--accent-soft);
+}
+
+.chat-dropdown-empty {
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.chat-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-dropdown::-webkit-scrollbar-thumb {
+  background: rgba(137, 208, 249, 0.35);
+  border-radius: 10px;
+}
+
+.sentiment-result {
+  margin: 20px 32px 32px;
+  padding: 28px;
+  background: var(--accent-soft);
+  border-radius: 16px;
+  text-align: center;
+  min-height: 232px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.sentiment-result-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.sentiment-result-total {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 3.3rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-top: 8px;
+}
+
+.sentiment-result-total-label {
+  margin-top: 6px;
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.sentiment-breakdown {
+  display: flex;
+  gap: 14px;
+}
+
+.sentiment-breakdown-card {
+  flex: 1;
+  background: white;
+  border-radius: 14px;
+  padding: 18px;
+  border: 1px solid var(--border);
+}
+
+.sentiment-breakdown-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.sentiment-breakdown-value {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.sentiment-skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.skeleton-line,
+.skeleton-box {
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ece9f7 25%, #f7f3ff 50%, #ece9f7 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+.skeleton-total {
+  width: 120px;
+  height: 46px;
+  margin-bottom: 10px;
+}
+
+.skeleton-label {
+  width: 90px;
+  height: 12px;
+  margin-bottom: 24px;
+}
+
+.skeleton-box {
+  flex: 1;
+  height: 90px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-line,
+  .skeleton-box { animation: none; }
+}
+
+@media (max-width: 520px) {
+  .sentiment-breakdown {
+    flex-direction: column;
+  }
+}
+
+.sentiment-scale-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.sentiment-scale-hint strong {
+  color: var(--ink);
+  font-weight: 700;
+}

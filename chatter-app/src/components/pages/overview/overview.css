@@ -26,3 +26,20 @@
   max-width: none;
   width: 100%;
 }
+
+.overview-grid > .meta-page,
+.overview-grid > .bf-page,
+.overview-grid > .search-page,
+.overview-grid > .sentiment-page {
+  padding: 0;
+  min-height: 0;
+  background: none;
+}
+
+.overview-grid > .meta-page > .meta-header,
+.overview-grid > .bf-page > .bf-card,
+.overview-grid > .search-page > .search-card,
+.overview-grid > .sentiment-page > .sentiment-card {
+  max-width: none;
+  width: 100%;
+}

@@ -99,6 +99,8 @@ func main() {
 		api.GET("/most-texted-date", controllers.MostTextedDate)
 		api.GET("/search", controllers.Search)
 		api.GET("/meta-data", controllers.MetaData)
+		api.GET("/sentiment-analysis", controllers.SentimentAnalysis)
+		api.GET("/get-all-chats", controllers.GetAllChats)
 	}
 
 	distFS, err := fs.Sub(frontendFiles, "chatter-app/dist")

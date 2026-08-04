@@ -6,6 +6,7 @@ require (
 	github.com/gin-contrib/cors v1.7.7
 	github.com/gin-gonic/gin v1.12.0
 	github.com/go-gota/gota v0.12.0
+	github.com/grassmudhorses/vader-go v0.0.0-20191126145716-003d5aacdb71
 	gorm.io/driver/sqlite v1.6.0
 	gorm.io/gorm v1.31.2
 )

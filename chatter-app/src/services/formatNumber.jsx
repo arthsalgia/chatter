@@ -1,5 +1,9 @@
 export default function formatNumber(num) {
-    const lastPart = num.slice(-10);
-    const firstPart = num.slice(0, num.length -10)
-    return firstPart + " " + lastPart
+    const strNum = num ? String(num) : "";
+    if (strNum.startsWith("+")) { 
+        const lastPart = strNum.slice(-10);
+        const firstPart = strNum.slice(0, strNum.length - 10);
+        return firstPart + " " + lastPart;
+    }
+    return strNum;
 }

@@ -113,8 +113,8 @@ func LoadAllMessages() bool {
 		flat = append(flat, FlatMessage{
 			ID:       i,
 			ROWID:    m.ROWID,
-			Text:     text,
-			ChatID:   c_id,
+			Text:     strings.TrimSpace(text),
+			ChatID:   strings.TrimSpace(c_id),
 			IsFromMe: m.Is_from_me,
 			Date:     messageTime.Local().Format("2006-01-02"),
 		})
