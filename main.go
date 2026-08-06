@@ -65,9 +65,9 @@ func main() {
 	}
 
 	fmt.Println("Starting server...")
-	fmt.Println("Reading through", *dbPathPtr, "...")
+	fmt.Println("Reading through", dbPath, "...")
 
-	services.ConnectDb(*dbPathPtr)
+	services.ConnectDb(dbPath)
 	start := controllers.LoadAllMessages()
 	if !start {
 		fmt.Println("Empty or invalid database")
