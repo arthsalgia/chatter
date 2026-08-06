@@ -23,32 +23,52 @@ func SentimentAnalysis(c *gin.Context) {
 		Filter(dataframe.F{Colname: "ChatID", Comparator: series.Eq, Comparando: Chat}).
 		Filter(dataframe.F{Colname: "IsFromMe", Comparator: series.Eq, Comparando: 0}).Col("Text").Records()
 
-	getAverageCompound := func(texts []string) float64 {
+	getAverageCompound := func(texts []string) (int, int, int) {
 
-		totalCompound := 0.0
-		validCount := 0
+		var pos, neg, neu int
 
 		for _, text := range texts {
 			if text != "" {
 				parsedText := sentitext.Parse(text, lexicon.DefaultLexicon)
 				scores := sentitext.PolarityScore(parsedText)
-				totalCompound += scores.Compound
-				validCount++
+				if scores.Compound >= 0.05 {
+					pos++
+				} else if scores.Compound <= -0.05 {
+					neg++
+				} else {
+					neu++
+				}
 			}
 		}
 
-		if validCount == 0 {
-			return 0.0
-		}
-		return totalCompound / float64(validCount)
+		return pos, neg, neu
 	}
 
-	avgMe := getAverageCompound(textsMe)
-	avgOther := getAverageCompound(textsOther)
+	posMe, negMe, neuMe := getAverageCompound(textsMe)
+	posOther, negOther, neuOther := getAverageCompound(textsOther)
+
+	sentimentMe := float64(posMe-negMe) / float64(posMe+negMe+neuMe)
+	sentimentOther := float64(posOther-negOther) / float64(posOther+negOther+neuOther)
+
+	totalPos := posMe + posOther
+	totalNeg := negMe + negOther
+	totalNeu := neuMe + neuOther
+
+	totalSentiment := 0.0
+	totalCount := totalPos + totalNeg + totalNeu
+	if totalCount > 0 {
+		totalSentiment = float64(totalPos-totalNeg) / float64(totalCount)
+	}
 
 	c.JSON(200, gin.H{
-		"totalSentiment": fmt.Sprintf("%.2f", (avgMe*100*float64(len(textsMe))+(avgOther*100*float64(len(textsOther))))/(float64(len(textsMe))+float64(len(textsOther)))),
-		"sentimentMe":    fmt.Sprintf("%.2f", avgMe*100),
-		"sentimentOther": fmt.Sprintf("%.2f", avgOther*100),
+		"totalSentiment": fmt.Sprintf("%.2f", totalSentiment),
+		"sentimentMe":    fmt.Sprintf("%.2f", sentimentMe),
+		"sentimentOther": fmt.Sprintf("%.2f", sentimentOther),
+		"posMe":          posMe,
+		"negMe":          negMe,
+		"neuMe":          neuMe,
+		"posOther":       posOther,
+		"negOther":       negOther,
+		"neuOther":       neuOther,
 	})
 }

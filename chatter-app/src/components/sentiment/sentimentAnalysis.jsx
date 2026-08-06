@@ -99,6 +99,12 @@ export default function SentimentAnalysis() {
   const totalSentiment = sentiment?.totalSentiment ?? "0.0";
   const sentimentMe = sentiment?.sentimentMe ?? "0.0";
   const sentimentOther = sentiment?.sentimentOther ?? "0.0";
+  const posMe = sentiment?.posMe ?? 0;
+  const negMe = sentiment?.negMe ?? 0;
+  const neuMe = sentiment?.neuMe ?? 0;
+  const posOther = sentiment?.posOther ?? 0;
+  const negOther = sentiment?.negOther ?? 0;
+  const neuOther = sentiment?.neuOther ?? 0;
 
   return (
     <div className="sentiment-page">
@@ -165,7 +171,7 @@ export default function SentimentAnalysis() {
           </div>
 
           <div className="sentiment-scale-hint">
-            A score of -100 is very negative while 100 is very positive, a score of 0 is neutral
+            A score of -1 is very negative while 1 is very positive, a score of 0 is neutral
           </div>
         </div>
 
@@ -189,14 +195,54 @@ export default function SentimentAnalysis() {
 
               <div className="sentiment-breakdown">
                 <div className="sentiment-breakdown-card">
-                  <div className="sentiment-breakdown-title">You</div>
+                  <div className="sentiment-breakdown-title">Your sentiment</div>
                   <div className="sentiment-breakdown-value">{sentimentMe}</div>
                 </div>
                 <div className="sentiment-breakdown-card">
-                  <div className="sentiment-breakdown-title">Them</div>
+                  <div className="sentiment-breakdown-title">Their sentiment</div>
                   <div className="sentiment-breakdown-value">{sentimentOther}</div>
                 </div>
               </div>
+
+              <div className="sentiment-tone-breakdown">
+                <div className="tone-column">
+                  <div className="sentiment-breakdown-title">You</div>
+                  <div className="tone-row">
+                    <span className="tone-label tone-label-positive">Positive</span>
+                    <span className="tone-value tone-value-positive">{posMe}</span>
+                  </div>
+                  <div className="tone-row">
+                    <span className="tone-label tone-label-negative">Negative</span>
+                    <span className="tone-value tone-value-negative">{negMe}</span>
+                  </div>
+                  <div className="tone-row">
+                    <span className="tone-label tone-label-neutral">Neutral</span>
+                    <span className="tone-value tone-value-neutral">{neuMe}</span>
+                  </div>
+                </div>
+
+                <div className="tone-divider" />
+
+                <div className="tone-column">
+                  <div className="sentiment-breakdown-title">Them</div>
+                  <div className="tone-row">
+                    <span className="tone-label tone-label-positive">Positive</span>
+                    <span className="tone-value tone-value-positive">{posOther}</span>
+                  </div>
+                  <div className="tone-row">
+                    <span className="tone-label tone-label-negative">Negative</span>
+                    <span className="tone-value tone-value-negative">{negOther}</span>
+                  </div>
+                  <div className="tone-row">
+                    <span className="tone-label tone-label-neutral">Neutral</span>
+                    <span className="tone-value tone-value-neutral">{neuOther}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="sentiment-tone-hint">
+                Counts how many of your messages were classified as positive, negative, or neutral.
+              </div>
+              
             </>
           )}
         </div>
