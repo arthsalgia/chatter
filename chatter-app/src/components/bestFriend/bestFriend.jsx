@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./bestFriend.css"
 import bestFriendApi from "../../hooks/bestFriend";
-import formatNumber from "../../services/formatNumber";
 
 export default function BestFriend() {
   const [startDate, setStartDate] = useState("");
@@ -19,7 +18,7 @@ export default function BestFriend() {
       try {
         setBfLoading(true);
         const data = await bestFriendApi(startDate, endDate);
-        setBf(formatNumber(data.best_friend));
+        setBf(data.best_friend);
         setNoMessages(data.number_of_messages);
       }
       catch (err) {

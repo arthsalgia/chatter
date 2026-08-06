@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import "./sentimentAnalysis.css"
 import chatsApi from "../../hooks/chats";
 import sentimentAnalysisApi from "../../hooks/sentimentAnalysis";
-import formatNumber from "../../services/formatNumber";
 
 export default function SentimentAnalysis() {
   const [allChats, setAllChats] = useState([]);
@@ -25,7 +24,7 @@ export default function SentimentAnalysis() {
         const rawChats = data?.chats || [];
         const formattedChats = rawChats.map((chat) => ({
           raw: chat,
-          label: formatNumber(chat),
+          label: chat,
         }));
 
         setAllChats(formattedChats);

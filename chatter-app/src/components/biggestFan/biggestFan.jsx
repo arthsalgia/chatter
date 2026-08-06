@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./biggestFan.css"
 import biggestFanApi from "../../hooks/biggestFan"
-import formatNumber from "../../services/formatNumber";
 
 export default function BiggestFan() {
   const [startDate, setStartDate] = useState("");
@@ -19,7 +18,7 @@ export default function BiggestFan() {
       try {
         setBfLoading(true);
         const data = await biggestFanApi(startDate, endDate);
-        setBf(formatNumber(data.biggest_fan));
+        setBf(data.biggest_fan);
         setNoMessages(data.number_of_messages);
       }
       catch (err) {

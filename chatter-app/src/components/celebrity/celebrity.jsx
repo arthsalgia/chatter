@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./celebrity.css";
 import celebrityApi from "../../hooks/celebrity";
-import formatNumber from "../../services/formatNumber";
 
 export default function Celebrity() {
   const [startDate, setStartDate] = useState("");
@@ -21,7 +20,7 @@ export default function Celebrity() {
 
         const data = await celebrityApi(startDate, endDate);
 
-        setCelebrity(formatNumber(data.celebrity));
+        setCelebrity(data.celebrity);
         setNoMessages(data.number_of_messages);
 
       } catch (err) {
