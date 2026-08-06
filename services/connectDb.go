@@ -19,7 +19,7 @@ func ConnectDb(file string) {
 	newLogger := logger.New(
 		log.New(os.Stdout, "\r\n", log.LstdFlags),
 		logger.Config{
-			SlowThreshold: 2 * time.Second,
+			SlowThreshold: 5 * time.Second,
 			LogLevel:      logger.Warn,
 		},
 	)
